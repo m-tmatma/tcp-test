@@ -1,0 +1,8 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.exclude": {
+        ".vscode": true,
+        "tcpclient": true,
+        "tcpserver": true
+    }
+}
