@@ -138,6 +138,7 @@ int main(int argc, char **argv) {
     if (childfd < 0)
       error("ERROR on accept");
 
+#if 0
     /*
      * gethostbyaddr: determine who sent the message
      */
@@ -150,6 +151,7 @@ int main(int argc, char **argv) {
       error("ERROR on inet_ntoa\n");
     printf("server established connection with %s (%s)\n",
 	   hostp->h_name, hostaddrp);
+#endif
 
     /*
      * read: read input string from the client

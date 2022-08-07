@@ -13,6 +13,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <arpa/inet.h>
 
 #define BUFSIZE 1024
 
@@ -44,6 +45,7 @@ int main(int argc, char **argv) {
     if (sockfd < 0)
         error("ERROR opening socket");
 
+#if 0
     /* gethostbyname: get the server's DNS entry */
     server = gethostbyname(hostname);
     if (server == NULL) {
@@ -56,6 +58,11 @@ int main(int argc, char **argv) {
     serveraddr.sin_family = AF_INET;
     bcopy((char *)server->h_addr,
 	  (char *)&serveraddr.sin_addr.s_addr, server->h_length);
+#else
+    bzero((char *) &serveraddr, sizeof(serveraddr));
+    serveraddr.sin_family = AF_INET;
+    inet_pton(AF_INET, hostname, &(serveraddr.sin_addr));
+#endif
     serveraddr.sin_port = htons(portno);
 
     /* connect: create a connection with the server */
